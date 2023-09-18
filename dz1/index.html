@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">	
+		<title>мем дня</title>
+		<style>
+			@font-face
+			{
+				font-family: Lobster;
+				src: url(fonts/Lobster.ttf);
+			}
+			.remember
+			{
+			color: green;
+			}
+			.forgot
+			{
+			color: red;
+			}
+			h1
+			{
+				font-family: Lobster;
+				text-align: center;
+				font-size: 30px;
+			}
+		</style>
+	</head>
+	<body>
+		<section>
+			<header><h1>Что я умею/помню</h1></header>
+			<ol class="remember">
+				<li>Гуглить (не очень хорошо)</li>
+				<li>Сtrl+C (очень хорошо)</li>
+				<li>Сtrl+V (тоже весьма хорошо)</li>
+				<li>Открывать Developer Tools и вырезать неугодные элементы</li>
+				<li><!--Добавлять комментарии--></li>
+			</ol>
+			<p class="remember">Если придётся вспоминать что-то из курса, то это произойдёт достаточно быстро и безболезненно. Лучше всего в памяти отложилось использование тегов, css, а также ползание по дереву документа (DOM).</p>
+		</section>
+		<section>
+			<header><h1>Что я не умею/не помню</h1></header>
+			<ol class="forgot">
+				<li>Остальной JavaScript</li>
+				<li>PHP</li>
+			</ol>
+			<p>Хотелось бы получить общее представление о существующих возможностях/невозможностях веб-технологий.</p>
+		</section>
+		<section>
+			<header><h1>Мем дня</h1></header>
+				<button id="daily_meme_button">Показать мем дня</button>
+				<div id="daily_meme_div">
+					
+				</div>
+		</section>
+		<script>
+			'use strict'
+			{
+				function today_meme_name()
+				{
+					let now = new Date();
+					let day = now.getDay();
+					//console.log('memes/meme'+day.toString()+'.jpg');
+					return 'memes/meme'+day.toString()+'.jpg';
+				};
+				
+				function show_today_meme()
+				{
+					let pic = document.getElementById("daily_meme_pic");
+					if (!pic)
+					{
+						let pic = document.createElement("img");
+						pic.style = "width: 600px";
+						pic.src = today_meme_name();
+						pic.id = "daily_meme_pic";
+						let meme_div = document.getElementById("daily_meme_div");
+						meme_div.appendChild(pic);
+					}
+					else
+					{
+						pic.src = today_meme_name();
+					}
+				}
+				
+				let meme_button = document.getElementById("daily_meme_button");
+					meme_button.addEventListener("click", function (e) {show_today_meme();} );
+			}
+		</script>
+	</body>
+</html>
