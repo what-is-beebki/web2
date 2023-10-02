@@ -17,6 +17,7 @@ class GetMemeHandler(tornado.web.RequestHandler):
         try:
             with open(path, 'rb') as f:
                 data = f.read()
+                self.set_header("Content-Type", "image/jpeg") # класс работает
                 self.write(data)
             self.finish()
         except:
@@ -31,21 +32,22 @@ class CountVisitsHandler(tornado.web.RequestHandler):
         except:
             self.set_status(404)
 
-class ShowDocHandler(tornado.web.RequestHandler):
-    def get(self):
-        path = '../dz1/index.html'
-        try:
-            with open(path, 'rb') as f:
-                data = f.read()
-                self.write(data)
-            self.finish()
-        except:
-            self.set_status(404)
+#class ShowDocHandler(tornado.web.RequestHandler):
+    #def get(self):
+        #path = '../dz1/index.html'
+        #try:
+            #with open(path, 'rb') as f:
+                #data = f.read()
+                #self.write(data)
+            #self.finish()
+        #except:
+            #self.set_status(404)
 
 async def main():
     app = tornado.web.Application([(r"/get_meme", GetMemeHandler),
                                    (r"/count_visits", CountVisitsHandler),
-                                   (r"/show_doc", ShowDocHandler)])
+                                   (r"/show_doc", tornado.web.StaticFileHandler, {"path": '../dz1/index.html'})]) # оаоа не работает(((((((
+                                   #(r"/show_doc", ShowDocHandler)])
     app.listen(8888)
     await asyncio.Event().wait()
 
