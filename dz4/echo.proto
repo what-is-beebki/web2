@@ -1,0 +1,27 @@
+
+syntax = "proto3";
+package dz4;
+
+message Vect2 {
+  float val_x = 1;
+  float val_y = 2;
+}
+
+message RotaryFieldResponce {
+  repeated Vect2 point = 1;
+  repeated Vect2 field = 2;
+  string direction = 3;
+}
+
+message RotaryFieldRequest {
+  repeated Vect2 point = 1;
+  string direction = 2;
+  map <string, Vect2> vector = 3;
+}
+
+service EchoService {
+  rpc RotaryFieldEcho(RotaryFieldRequest) returns (RotaryFieldResponce);
+  rpc PointEcho(Vect2) returns (Vect2);
+}
+
+// python3 -m grpc_tools.protoc -I/home/aaaaaanna/grpc/examples/protos/ --proto_path=/home/aaaaaanna/web2/web2/dz4 --python_out=. --pyi_out=. --grpc_python_out=. echo.proto
