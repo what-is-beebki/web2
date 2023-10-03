@@ -8,20 +8,25 @@ message Vect2 {
 }
 
 message RotaryFieldResponce {
-  repeated Vect2 point = 1;
-  repeated Vect2 field = 2;
+  Vect2 point = 1;
+  Vect2 field = 2;
   string direction = 3;
 }
 
 message RotaryFieldRequest {
-  repeated Vect2 point = 1;
+  Vect2 point = 1;
   string direction = 2;
   map <string, Vect2> vector = 3;
+}
+
+message Sequence {
+  repeated int32 numbers = 1;
 }
 
 service EchoService {
   rpc RotaryFieldEcho(RotaryFieldRequest) returns (RotaryFieldResponce);
   rpc PointEcho(Vect2) returns (Vect2);
+  rpc SequenceEcho(Sequence) returns (Sequence);
 }
 
 // python3 -m grpc_tools.protoc -I/home/aaaaaanna/grpc/examples/protos/ --proto_path=/home/aaaaaanna/web2/web2/dz4 --python_out=. --pyi_out=. --grpc_python_out=. echo.proto

@@ -24,6 +24,11 @@ class EchoServiceStub(object):
                 request_serializer=echo__pb2.Vect2.SerializeToString,
                 response_deserializer=echo__pb2.Vect2.FromString,
                 )
+        self.SequenceEcho = channel.unary_unary(
+                '/dz4.EchoService/SequenceEcho',
+                request_serializer=echo__pb2.Sequence.SerializeToString,
+                response_deserializer=echo__pb2.Sequence.FromString,
+                )
 
 
 class EchoServiceServicer(object):
@@ -41,6 +46,12 @@ class EchoServiceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def SequenceEcho(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_EchoServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -53,6 +64,11 @@ def add_EchoServiceServicer_to_server(servicer, server):
                     servicer.PointEcho,
                     request_deserializer=echo__pb2.Vect2.FromString,
                     response_serializer=echo__pb2.Vect2.SerializeToString,
+            ),
+            'SequenceEcho': grpc.unary_unary_rpc_method_handler(
+                    servicer.SequenceEcho,
+                    request_deserializer=echo__pb2.Sequence.FromString,
+                    response_serializer=echo__pb2.Sequence.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -95,5 +111,22 @@ class EchoService(object):
         return grpc.experimental.unary_unary(request, target, '/dz4.EchoService/PointEcho',
             echo__pb2.Vect2.SerializeToString,
             echo__pb2.Vect2.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def SequenceEcho(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/dz4.EchoService/SequenceEcho',
+            echo__pb2.Sequence.SerializeToString,
+            echo__pb2.Sequence.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

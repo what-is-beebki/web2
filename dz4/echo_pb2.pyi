@@ -18,10 +18,10 @@ class RotaryFieldResponce(_message.Message):
     POINT_FIELD_NUMBER: _ClassVar[int]
     FIELD_FIELD_NUMBER: _ClassVar[int]
     DIRECTION_FIELD_NUMBER: _ClassVar[int]
-    point: _containers.RepeatedCompositeFieldContainer[Vect2]
-    field: _containers.RepeatedCompositeFieldContainer[Vect2]
+    point: Vect2
+    field: Vect2
     direction: str
-    def __init__(self, point: _Optional[_Iterable[_Union[Vect2, _Mapping]]] = ..., field: _Optional[_Iterable[_Union[Vect2, _Mapping]]] = ..., direction: _Optional[str] = ...) -> None: ...
+    def __init__(self, point: _Optional[_Union[Vect2, _Mapping]] = ..., field: _Optional[_Union[Vect2, _Mapping]] = ..., direction: _Optional[str] = ...) -> None: ...
 
 class RotaryFieldRequest(_message.Message):
     __slots__ = ["point", "direction", "vector"]
@@ -35,7 +35,13 @@ class RotaryFieldRequest(_message.Message):
     POINT_FIELD_NUMBER: _ClassVar[int]
     DIRECTION_FIELD_NUMBER: _ClassVar[int]
     VECTOR_FIELD_NUMBER: _ClassVar[int]
-    point: _containers.RepeatedCompositeFieldContainer[Vect2]
+    point: Vect2
     direction: str
     vector: _containers.MessageMap[str, Vect2]
-    def __init__(self, point: _Optional[_Iterable[_Union[Vect2, _Mapping]]] = ..., direction: _Optional[str] = ..., vector: _Optional[_Mapping[str, Vect2]] = ...) -> None: ...
+    def __init__(self, point: _Optional[_Union[Vect2, _Mapping]] = ..., direction: _Optional[str] = ..., vector: _Optional[_Mapping[str, Vect2]] = ...) -> None: ...
+
+class Sequence(_message.Message):
+    __slots__ = ["numbers"]
+    NUMBERS_FIELD_NUMBER: _ClassVar[int]
+    numbers: _containers.RepeatedScalarFieldContainer[int]
+    def __init__(self, numbers: _Optional[_Iterable[int]] = ...) -> None: ...
