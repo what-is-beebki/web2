@@ -1,0 +1,7 @@
+syntax = "proto3";
+package dz5;
+
+message Sequence {
+  repeated int32 numbers = 1;
+}
+//python3 -m grpc_tools.protoc -I/home/aaaaaanna/grpc/examples/protos/ --proto_path=/home/aaaaaanna/web2/web2/dz5 --python_out=. --pyi_out=. --grpc_python_out=. sequence_msg.proto
