@@ -15,24 +15,25 @@ class CountVisitsHandler(tornado.web.RequestHandler):
     def prepare(self):
         global radish
         self.radish = radish
-        self.now = datetime.date.today()
+        self.now = datetime.datetime.now()
     
-    def NowIsToday(self):
-        global today
-        if self.now.isoformat()  == today.isoformat():
-            return True
-        else:
-            today = datetime.date.today()
-            return False
+    def set_deadline(self):
+        deadline = datetime.datetime(self.now.year, self.now.month, self.now.day, 23, 59, 59)
+        expire_time = (deadline - self.now).seconds
+        return expire_time
     
     def get(self):
         
-        if not self.NowIsToday():
-            #print('reset counter')
+        if self.radish.exists('visits'):
+            self.radish.incr('visits')
+            if self.radish.ttl('visits') == -1:
+                self.radish.delete('visits')
+            
+        if not self.radish.exists('visits'):
             self.radish.set('visits', 0)
-        visits = self.radish.incr('visits')
+            self.radish.expire('visits', self.set_deadline())
         try:
-            self.write("That's {} visit!".format(visits))
+            self.write("That's {} visit!".format(self.radish.get('visits')))
         except:
             self.set_status(404)
 
