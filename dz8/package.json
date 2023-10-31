@@ -1,0 +1,19 @@
+{
+  "dependencies": {
+    "ws": "^8.14.2"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "name": "dz8",
+  "version": "1.0.0",
+  "description": "web socket example",
+  "main": "server.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "what-is-beebki/web2/dz8"
+  },
+  "author": "aaaaaanna",
+  "license": "ISC"
+}

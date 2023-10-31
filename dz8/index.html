@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+	<title>8 dz</title>
+  </head>
+  <body>
+	<p>как-то тут пустовато</p>
+	<script>
+	  const socket = new WebSocket('ws://localhost:9000');
+
+	  socket.onopen = () => {
+		console.log('Клиент: соединение установлено');
+		socket.send('апчхи');
+	  };
+	  
+	  socket.onmessage = (event) => {
+	  console.log('Клиент: получено сообщение: ', event.data);
+      };
+
+	socket.onclose = () => {
+	  console.log('Клиент: соединение прервано');
+	};
+	</script>
+  </body>
+</html>
